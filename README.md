@@ -370,7 +370,7 @@ kubectl --kubeconfig=/etc/kubernetes/admin.conf create -f https://docs.projectca
 ## Join other master nodes to the cluster
 > Use the respective kubeadm join commands you copied from the output of kubeadm init command on the first master.
 
-> IMPORTANT: Don't forget the --apiserver-advertise-address option to the join command when you join the other master nodes.
+> IMPORTANT: Don't forget the **--apiserver-advertise-address=192.168.168.201** option to the join command when you join the other master nodes.
 
 ## Join worker nodes to the cluster
 > Use the kubeadm join command you copied from the output of kubeadm init command on the first master
