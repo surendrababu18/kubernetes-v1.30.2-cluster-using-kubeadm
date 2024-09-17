@@ -8,6 +8,7 @@ This guide provides step-by-step instructions to set up a Kubernetes 1.30.2 clus
 - Ubuntu 22.04 LTS installed on all nodes.
 - Access to the internet.
 - User with `sudo` privileges.
+- apt install socat
 
 ## Step-by-Step Installation
 
