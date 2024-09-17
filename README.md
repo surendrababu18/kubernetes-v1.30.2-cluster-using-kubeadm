@@ -356,4 +356,39 @@ kubeadm join 192.168.122.100:6443 --token zcijug.ye3vrct74itrkesp \
         --discovery-token-ca-cert-hash sha256:e9dd1a0638a5a1aa1850c16f4c9eeaa2e58d03f97fd0403f587c69502570c9cd
 ```
 
+### Steps for Multi Master and Node Join
+##### Initialize Kubernetes Cluster
+```
+kubeadm init --control-plane-endpoint="172.16.16.100:6443" --upload-certs --apiserver-advertise-address=172.16.16.101 --pod-network-cidr=192.168.0.0/16
+```
+Copy the commands to join other master nodes and worker nodes.
+##### Deploy Calico network
+```
+kubectl --kubeconfig=/etc/kubernetes/admin.conf create -f https://docs.projectcalico.org/v3.18/manifests/calico.yaml
+```
+
+## Join other master nodes to the cluster
+> Use the respective kubeadm join commands you copied from the output of kubeadm init command on the first master.
+
+> IMPORTANT: Don't forget the --apiserver-advertise-address option to the join command when you join the other master nodes.
+
+## Join worker nodes to the cluster
+> Use the kubeadm join command you copied from the output of kubeadm init command on the first master
+
+
+## Downloading kube config to your local machine
+On your host machine
+```
+mkdir ~/.kube
+scp root@172.16.16.101:/etc/kubernetes/admin.conf ~/.kube/config
+```
+Password for root account is kubeadmin (if you used my Vagrant setup)
+
+## Verifying the cluster
+```
+kubectl cluster-info
+kubectl get nodes
+```
+
+Have Fun!!
 
